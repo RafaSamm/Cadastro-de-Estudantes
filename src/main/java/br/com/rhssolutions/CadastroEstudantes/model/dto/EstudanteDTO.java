@@ -13,6 +13,5 @@ public record EstudanteDTO(@NotBlank(message = "O nome deve ser informado")
                            @Min(value = 18, message = "A idade deve ser maior ou igual a 18")
                            Integer idade) {
 
-
 }
 
