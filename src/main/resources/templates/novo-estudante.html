@@ -14,13 +14,19 @@
     <script th:src="@{/bootstrap-5.3.2/js/bootstrap.min.js}"></script>
 
     <title>Estudantes</title>
+    <style>
+        .mensagem {
+            color: red;
+        }
+    </style>
+
 
 </head>
 <body>
 <div class="container">
     <div class="row" style="padding-bottom: 30px;">
         <div class="col">
-           <h2>Cadastro de Estudantes</h2>
+            <h2>Cadastro de Estudantes</h2>
             <div class="alert alert-success alert-dismissible fade show"
                  th:if="${mensagem}">
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -29,30 +35,43 @@
 
             <form th:action="@{/salvar}" th:object=${novoEstudante} method="post">
 
-               <div class="row mb-3">
-                   <label class="col-sm-1 col-form-label">Nome:</label>
-                   <div class="col-sm-5">
-                     <input class="form-control" type="text" th:field="*{nome}">
-                   </div>
-               </div>
+                <div class="row mb-3">
+                    <label class="col-sm-1 col-form-label">Nome:</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" type="text" th:field="*{nome}">
+                    </div>
+                    <div class="col-sm-5">
+                       <span class="mensagem" th:if="${#fields.hasErrors('nome')}"
+                             th:errors="*{nome}"></span>
+                    </div>
+                </div>
 
-               <div class="row mb-3">
-                   <label class="col-sm-1 col-form-label">Email:</label>
-                   <div class="col-sm-5">
-                       <input class="form-control" type="text" th:field="*{email}">
-                   </div>
-               </div>
+                <div class="row mb-3">
+                    <label class="col-sm-1 col-form-label">Email:</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" type="text" th:field="*{email}">
+                    </div>
+                    <div class="col-sm-5">
+                       <span class="mensagem" th:if="${#fields.hasErrors('email')}"
+                             th:errors="*{email}"></span>
 
-               <div class="row mb-3">
-                   <label class="col-sm-1 col-form-label">Idade:</label>
-                   <div class="col-sm-5">
-                       <input class="form-control" type="text" th:field="*{idade}">
-                   </div>
-               </div>
+                    </div>
+                </div>
 
-               <input class="btn btn-primary" type="submit" value="Salvar" />
+                <div class="row mb-3">
+                    <label class="col-sm-1 col-form-label">Idade:</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" type="text" th:field="*{idade}">
+                    </div>
+                    <div class="col-sm-5">
+                       <span class="mensagem" th:if="${#fields.hasErrors('idade')}"
+                             th:errors="*{idade}"></span>
+                    </div>
+                </div>
 
-           </form>
+                <input class="btn btn-primary" type="submit" value="Salvar"/>
+
+            </form>
         </div>
     </div>
 </div>

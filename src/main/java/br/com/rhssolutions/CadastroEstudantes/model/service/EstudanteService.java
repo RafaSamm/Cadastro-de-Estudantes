@@ -17,7 +17,7 @@ public class EstudanteService {
         this.repository = repository;
     }
 
-    public Estudante salvar(@Valid EstudanteDTO dto) {
+    public Estudante salvar(EstudanteDTO dto) {
         var estudante = new Estudante();
         BeanUtils.copyProperties(dto, estudante); // copia as propriedades de dto para estudante
         return repository.save(estudante);

@@ -3,6 +3,8 @@ package br.com.rhssolutions.CadastroEstudantes.model.dto;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
+
 
 public record EstudanteDTO(@NotBlank(message = "O nome deve ser informado")
                            @Size(min = 2, message = "O nome deve ter no mínimo 2 caracteres")
@@ -12,6 +14,7 @@ public record EstudanteDTO(@NotBlank(message = "O nome deve ser informado")
                            String email,
                            @Min(value = 18, message = "A idade deve ser maior ou igual a 18")
                            Integer idade) {
+
 
 }
 
