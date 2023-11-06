@@ -14,7 +14,7 @@ src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/intellij/intellij-origin
 ## ⬇️Contribuições
 ```bash
 # Clone the project
-https://github.com/RafaSamm/Cadastro-de-Estudantes.git
+$ git clone https://github.com/RafaSamm/Cadastro-de-Estudantes.git
           
           
           
