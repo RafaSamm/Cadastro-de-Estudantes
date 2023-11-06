@@ -5,6 +5,7 @@ import br.com.rhssolutions.CadastroEstudantes.model.entity.Estudante;
 import br.com.rhssolutions.CadastroEstudantes.model.exception.EstudanteNotFoundException;
 import br.com.rhssolutions.CadastroEstudantes.model.service.EstudanteService;
 import jakarta.validation.Valid;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,6 +31,17 @@ public class EstudanteController {
     public String listaEstudante(Model model) {
         model.addAttribute("listaEstudantes", estudanteService.listarEstudantes());
         return "/lista-estudantes";
+    }
+
+    @PostMapping("/buscar")
+    public String listaEstudantePorNome(Model model, @Param("nome") String nome) {
+        if (nome == null) {
+            return "redirect:/";
+        } else {
+            Iterable<Estudante> estudantes = estudanteService.listarEstudantesPorNome(nome);
+            model.addAttribute("listaEstudantes", estudantes);
+            return "/lista-estudantes";
+        }
     }
 
     @GetMapping("/novo")
@@ -61,7 +73,36 @@ public class EstudanteController {
         return "redirect:/";
     }
 
+    @GetMapping("/atualizar/{id}") // Somente para buscar o estudante e retornar para a página de atualização
+    public String atualizarEstudante(@PathVariable("id") UUID id, RedirectAttributes attributes, Model model) {
+        try {
+            var estudante = estudanteService.listarEstudantePorId(id);
+            model.addAttribute("atualizarEstudante", estudante);
+            return "/atualizar-estudante";
 
+        } catch (EstudanteNotFoundException e) {
+            attributes.addFlashAttribute("mensagemErro", e.getMessage());
+        }
+        return "redirect:/";
+    }
 
+    @PostMapping("/atualizar/{id}")
+    public String editarEstudante(@PathVariable("id") UUID id,
+                                  @ModelAttribute("atualizarEstudante") @Valid EstudanteDTO dto,
+                                  BindingResult erros) throws EstudanteNotFoundException {
+        if (erros.hasErrors()) {
+            return "/atualizar-estudante";
+        }
+        estudanteService.atualizarEstudante(id, dto);
+        return "redirect:/";
+    }
 
 }
+
+
+
+
+
+
+
+

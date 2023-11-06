@@ -43,10 +43,20 @@ public class EstudanteService {
         }
 
     }
+
     public void apagarEstudante(@PathVariable("id") UUID id) throws EstudanteNotFoundException {
         var estudante = listarEstudantePorId(id);
         repository.delete(estudante);
     }
 
 
+    public Estudante atualizarEstudante(UUID id, EstudanteDTO dto) throws EstudanteNotFoundException {
+        var estudante = listarEstudantePorId(id);
+        BeanUtils.copyProperties(dto, estudante);
+        return repository.save(estudante);
+    }
+
+    public Iterable<Estudante> listarEstudantesPorNome(String nome) {
+        return repository.findByNomeContainingIgnoreCase(nome); // retorna uma lista de estudantes com o nome passado como parâmetro. Caso não haja nenhum estudante com o nome passado como parâmetro, retorna uma lista vazia.
+    }
 }

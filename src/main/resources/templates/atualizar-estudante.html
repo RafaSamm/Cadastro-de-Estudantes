@@ -26,14 +26,14 @@
 <div class="container">
     <div class="row" style="padding-bottom: 30px;">
         <div class="col">
-            <h2><b>Cadastro de Estudantes</b></h2>
+            <h2><b>Alterar Estudantes</b></h2>
             <div class="alert alert-success alert-dismissible fade show"
                  th:if="${mensagem}">
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 <span th:text="${mensagem}"></span>
             </div>
 
-            <form th:action="@{/salvar}" th:object=${novoEstudante} method="post">
+            <form th:action="@{/atualizar/{id}(id=${atualizarEstudante.id})}" th:object=${atualizarEstudante} method="post">
 
                 <div class="row mb-3">
                     <label class="col-sm-1 col-form-label">Nome:</label>

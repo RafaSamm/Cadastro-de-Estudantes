@@ -10,4 +10,6 @@ import java.util.UUID;
 @Repository
 public interface EstudanteRepository extends JpaRepository<Estudante, UUID> {
 
+    Iterable<Estudante> findByNomeContainingIgnoreCase(String nome);
+
 }

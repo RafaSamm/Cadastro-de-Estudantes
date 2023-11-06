@@ -27,6 +27,18 @@
             <span th:text="${mensagemErro}"></span>
         </div>
 
+        <div class="row">
+            <div class="col-sm-5">
+                <form th:action="@{/buscar}" method="post">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="nome" /> <input
+                            class="btn btn-primary" type="submit" value="Buscar" />
+                        <a th:href="@{/}" class="btn btn-danger" type="submit">Cancelar </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <table class="table table-striped">
             <thead>
             <tr>
@@ -52,6 +64,9 @@
                        th:data-confirm-delete="|Você gostaria de apagar ${estudante.nome}?|"
                        th:onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
                     </a>
+                    &nbsp;
+                    <a class="fa-regular fa-pen-to-square icon-dark"
+                        th:href="@{/atualizar/{id}(id=${estudante.id})}"></a>
                 </td>
             </tr>
             </tbody>
@@ -63,6 +78,9 @@
             <a th:href="@{/novo}" class="btn btn-primary">Cadastrar estudante</a>
         </div>
     </div>
+
+
+
 
 
 </div>
